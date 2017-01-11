@@ -1,0 +1,28 @@
+{
+    "name": "mirko-pagliai/serialized-array",
+    "description": "A class that allows you to read and write arrays using text files",
+    "homepage": "https://github.com/mirko-pagliai/serialized-array",
+    "type": "library",
+    "license": "AGPL",
+    "authors": [{
+        "name": "Mirko Pagliai",
+        "email": "mirko.pagliai@gmail.com"
+    }],
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "require-dev": {
+        "cakephp/cakephp-codesniffer": "2.*",
+        "mirko-pagliai/reflection": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SerializedArray\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SerializedArray\\Test\\": "tests/"
+        }
+    }
+}
