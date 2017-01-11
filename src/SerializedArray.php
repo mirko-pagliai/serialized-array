@@ -21,3 +21,105 @@
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
 namespace SerializedArray;
+
+/**
+ * This class allows you to read and write arrays using text files
+ */
+class SerializedArray
+{
+    /**
+     * File path
+     * @var string
+     */
+    protected $file;
+
+    /**
+     * Construct
+     * @param string $file Text file you want to read/write
+     * @return void
+     * @uses $file
+     */
+    public function __construct($file)
+    {
+        if (file_exists($file)) {
+            $target = $file;
+        } else {
+            $target = dirname($file);
+        }
+
+        if (!is_writable($target)) {
+            trigger_error(sprintf('File or directory %s not writeable', $target), E_USER_ERROR);
+        }
+
+        $this->file = $file;
+    }
+
+    /**
+     * Appends data to existing data
+     * @param mixed $data Data you want to append
+     * @return bool
+     * @uses read()
+     * @uses write()
+     */
+    public function append($data)
+    {
+        $existing = $this->read();
+        $existing[] = $data;
+
+        return $this->write($existing);
+    }
+
+    /**
+     * Prepends data to existing data
+     * @param mixed $data Data you want to prepend
+     * @return bool
+     * @uses read()
+     * @uses write()
+     */
+    public function prepend($data)
+    {
+        $existing = $this->read();
+        array_unshift($existing, $data);
+
+        return $this->write($existing);
+    }
+
+    /**
+     * Reads the content of the file.
+     *
+     * If there are no data or if the file does not exist, still returns an
+     *  empty array.
+     * @return array
+     * @uses $file
+     */
+    public function read()
+    {
+        if (!is_readable($this->file)) {
+            return [];
+        }
+
+        $data = file_get_contents($this->file);
+
+        if (empty($data)) {
+            return [];
+        }
+
+        //Unserializes
+        return unserialize($data);
+    }
+
+    /**
+     * Writes data.
+     *
+     * Note that this method will write the array to the entire files, deleting
+     *  any data already present. If you want to add data to existing data, use
+     *  instead `append()` or `prepend()` methods
+     * @param array $data Data you want to write
+     * @return bool
+     * @uses $file
+     */
+    public function write(array $data)
+    {
+        return (bool)file_put_contents($this->file, serialize($data));
+    }
+}
