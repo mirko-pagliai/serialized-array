@@ -104,8 +104,15 @@ class SerializedArray
             return [];
         }
 
-        //Unserializes
-        return unserialize($data);
+        //Tries to unserialize
+        //@codingStandardsIgnoreLine
+        $data = @unserialize($data);
+
+        if (!$data) {
+            return [];
+        }
+
+        return $data;
     }
 
     /**

@@ -213,6 +213,12 @@ class SerializedArrayTest extends PHPUnit_Framework_TestCase
         $result = $this->SerializedArray->read();
         $this->assertEmpty($result);
         $this->assertTrue(is_array($result));
+
+        //Creates a file with a string
+        file_put_contents($this->file, 'string');
+        $result = $this->SerializedArray->read();
+        $this->assertEmpty($result);
+        $this->assertTrue(is_array($result));
     }
 
     /**
