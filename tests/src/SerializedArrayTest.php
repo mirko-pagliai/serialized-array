@@ -22,14 +22,14 @@
  */
 namespace SerializedArray\Test;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Reflection\ReflectionTrait;
 use SerializedArray\SerializedArray;
 
 /**
  * SerializedArrayTest class
  */
-class SerializedArrayTest extends PHPUnit_Framework_TestCase
+class SerializedArrayTest extends TestCase
 {
     use ReflectionTrait;
 
@@ -88,7 +88,7 @@ class SerializedArrayTest extends PHPUnit_Framework_TestCase
      */
     public function testConstructNoWritableFile()
     {
-        $this->setExpectedException('PHPUnit_Framework_Error');
+        $this->expectException('PHPUnit\Framework\Error\Error');
         new SerializedArray('/noWritableFile');
     }
 
