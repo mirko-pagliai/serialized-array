@@ -21,3 +21,9 @@
  * @link        http://git.novatlantis.it Nova Atlantis Ltd
  */
 require_once 'vendor/autoload.php';
+
+if (class_exists('PHPUnit_Runner_Version')) {
+    class_alias('PHPUnit_Framework_TestResult', 'PHPUnit\Framework\TestResult');
+    class_alias('PHPUnit_Framework_Error', 'PHPUnit\Framework\Error\Error');
+    class_alias('PHPUnit_Framework_ExpectationFailedException', 'PHPUnit\Framework\ExpectationFailedException');
+}
