@@ -22,6 +22,8 @@
  */
 namespace SerializedArray;
 
+use Exception;
+
 /**
  * This class allows you to read and write arrays using text files
  */
@@ -37,6 +39,7 @@ class SerializedArray
      * Construct
      * @param string $file Text file you want to read/write
      * @return void
+     * @throws Exception
      * @uses $file
      */
     public function __construct($file)
@@ -48,7 +51,7 @@ class SerializedArray
         }
 
         if (!is_writable($target)) {
-            trigger_error(sprintf('File or directory %s not writeable', $target), E_USER_ERROR);
+            throw new Exception(sprintf('File or directory %s not writeable', $target), E_USER_ERROR);
         }
 
         $this->file = $file;
