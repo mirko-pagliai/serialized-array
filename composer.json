@@ -3,7 +3,7 @@
     "description": "A class that allows you to read and write arrays using text files",
     "homepage": "https://github.com/mirko-pagliai/serialized-array",
     "type": "library",
-    "license": "AGPL",
+    "license": "MIT",
     "authors": [{
         "name": "Mirko Pagliai",
         "email": "mirko.pagliai@gmail.com"
