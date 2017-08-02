@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of SerializedArray
+ * This file is part of SerializedArray.
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
@@ -55,8 +55,6 @@ class SerializedArrayTest extends TestCase
     public function tearDown()
     {
         parent::tearDown();
-
-        unset($this->SerializedArray);
 
         //Deletes the file
         //@codingStandardsIgnoreLine
