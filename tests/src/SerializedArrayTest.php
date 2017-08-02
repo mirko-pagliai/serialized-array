@@ -56,8 +56,6 @@ class SerializedArrayTest extends TestCase
     {
         parent::tearDown();
 
-        unset($this->SerializedArray);
-
         //Deletes the file
         //@codingStandardsIgnoreLine
         @unlink($this->file);
@@ -74,11 +72,12 @@ class SerializedArrayTest extends TestCase
 
     /**
      * Test for `__construct()` method, using a not writable file
+     * @expectedException Exception
+     * @expectedExceptionMessage File or directory / not writeable
      * @test
      */
     public function testConstructNoWritableFile()
     {
-        $this->expectException('PHPUnit\Framework\Error\Error');
         new SerializedArray('/noWritableFile');
     }
 
