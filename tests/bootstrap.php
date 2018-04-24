@@ -12,6 +12,10 @@
  */
 require_once 'vendor/autoload.php';
 
+if (!defined('DS')) {
+    define('DS', DIRECTORY_SEPARATOR);
+}
+
 if (class_exists('PHPUnit_Runner_Version')) {
     class_alias('PHPUnit_Framework_TestResult', 'PHPUnit\Framework\TestResult');
     class_alias('PHPUnit_Framework_Error', 'PHPUnit\Framework\Error\Error');
