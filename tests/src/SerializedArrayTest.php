@@ -13,8 +13,9 @@
 namespace SerializedArray\Test;
 
 use PHPUnit\Framework\TestCase;
-use Reflection\ReflectionTrait;
 use SerializedArray\SerializedArray;
+use Tools\ReflectionTrait;
+use Tools\TestSuite\TestCaseTrait;
 
 /**
  * SerializedArrayTest class
@@ -22,6 +23,7 @@ use SerializedArray\SerializedArray;
 class SerializedArrayTest extends TestCase
 {
     use ReflectionTrait;
+    use TestCaseTrait;
 
     /**
      * @var \MeTools\Utility\SerializedArray
@@ -44,7 +46,7 @@ class SerializedArrayTest extends TestCase
     {
         parent::setUp();
 
-        $this->file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'serialized';
+        $this->file = sys_get_temp_dir() . DS . 'serialized';
         $this->SerializedArray = new SerializedArray($this->file);
     }
 
@@ -57,8 +59,7 @@ class SerializedArrayTest extends TestCase
         parent::tearDown();
 
         //Deletes the file
-        //@codingStandardsIgnoreLine
-        @unlink($this->file);
+        safe_unlink($this->file);
     }
 
     /**
@@ -110,8 +111,7 @@ class SerializedArrayTest extends TestCase
             'second',
         ], $this->SerializedArray->read());
 
-        //@codingStandardsIgnoreLine
-        @unlink($this->file);
+        safe_unlink($this->file);
 
         $this->assertTrue($this->SerializedArray->append(['first', 'second']));
         $this->assertEquals([
@@ -149,8 +149,7 @@ class SerializedArrayTest extends TestCase
             'first',
         ], $this->SerializedArray->read());
 
-        //@codingStandardsIgnoreLine
-        @unlink($this->file);
+        safe_unlink($this->file);
 
         $this->assertTrue($this->SerializedArray->prepend(['first', 'second']));
         $this->assertEquals([
@@ -181,7 +180,7 @@ class SerializedArrayTest extends TestCase
         $this->assertFileNotExists($this->file);
         $result = $this->SerializedArray->read();
         $this->assertEmpty($result);
-        $this->assertTrue(is_array($result));
+        $this->assertIsArray($result);
 
         //Tries some values
         foreach ([
@@ -194,20 +193,20 @@ class SerializedArrayTest extends TestCase
             $this->assertTrue($this->SerializedArray->write($value));
             $result = $this->SerializedArray->read();
             $this->assertEquals($value, $result);
-            $this->assertTrue(is_array($result));
+            $this->assertIsArray($result);
         }
 
         //Creates an empty file. Now is always empty
         file_put_contents($this->file, null);
         $result = $this->SerializedArray->read();
         $this->assertEmpty($result);
-        $this->assertTrue(is_array($result));
+        $this->assertIsArray($result);
 
         //Creates a file with a string
         file_put_contents($this->file, 'string');
         $result = $this->SerializedArray->read();
         $this->assertEmpty($result);
-        $this->assertTrue(is_array($result));
+        $this->assertIsArray($result);
     }
 
     /**
@@ -225,9 +224,9 @@ class SerializedArrayTest extends TestCase
             [null],
         ] as $value) {
             $this->assertTrue($this->SerializedArray->write($value));
-            $result = unserialize(file_get_contents($this->file));
+            $result = safe_unserialize(file_get_contents($this->file));
             $this->assertEquals($value, $result);
-            $this->assertTrue(is_array($result));
+            $this->assertIsArray($result);
         }
     }
 }

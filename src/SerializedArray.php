@@ -98,8 +98,7 @@ class SerializedArray
         }
 
         //Tries to unserialize
-        //@codingStandardsIgnoreLine
-        $data = @unserialize($data);
+        $data = safe_unserialize($data);
 
         if (!$data) {
             return [];
