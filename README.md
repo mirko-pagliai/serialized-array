@@ -1,3 +1,8 @@
+Starting July 2018 and *1.0.3* version, **this repository has been abandoned**.
+See instead: [mirko-pagliai/php-tools](https://github.com/mirko-pagliai/php-tools).
+
+***
+
 # SerializedArray
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
